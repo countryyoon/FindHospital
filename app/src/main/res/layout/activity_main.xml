@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context=".view.MainActivity"
+
+
+    >
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="280dp"
+        android:layout_height="152dp"
+        app:srcCompat="@color/colorBackBlue"
+        tools:layout_editor_absoluteX="65dp"
+        tools:layout_editor_absoluteY="240dp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="280dp"
+        android:layout_height="152dp"
+        app:srcCompat="@color/colorBackBlue"
+        tools:layout_editor_absoluteX="65dp"
+        tools:layout_editor_absoluteY="420dp" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:background="@color/colorWhite"
+        android:textColor="@color/colorPrimary"
+        tools:layout_editor_absoluteX="91dp"
+        tools:layout_editor_absoluteY="296dp" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:background="@color/colorWhite"
+        android:textColor="@color/colorPrimary"
+        tools:layout_editor_absoluteX="91dp"
+        tools:layout_editor_absoluteY="474dp" />
+
+    <SearchView
+        android:layout_width="173dp"
+        android:layout_height="101dp"
+        android:background="@color/colorAccent"
+        tools:layout_editor_absoluteX="119dp"
+        tools:layout_editor_absoluteY="596dp" />
+
+    <SearchView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@color/colorBlack"
+        tools:layout_editor_absoluteX="279dp"
+        tools:layout_editor_absoluteY="297dp" />
+
+    <SearchView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@color/colorBlack"
+        tools:layout_editor_absoluteX="279dp"
+        tools:layout_editor_absoluteY="474dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
