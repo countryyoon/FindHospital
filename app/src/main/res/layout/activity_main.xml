@@ -5,71 +5,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    tools:context=".view.MainActivity"
+    android:orientation="horizontal"
+    tools:context=".view.MainActivity">
 
-
-    >
-
+    <SearchView
+        android:id="@+id/search_list"
+        android:layout_width="210dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="60dp"
+        android:background="@android:color/holo_blue_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="280dp"
+        android:layout_width="307dp"
         android:layout_height="152dp"
-        app:srcCompat="@color/colorBackBlue"
-        tools:layout_editor_absoluteX="65dp"
-        tools:layout_editor_absoluteY="240dp" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="280dp"
-        android:layout_height="152dp"
-        app:srcCompat="@color/colorBackBlue"
-        tools:layout_editor_absoluteX="65dp"
-        tools:layout_editor_absoluteY="420dp" />
+        android:layout_marginStart="51dp"
+        android:layout_marginLeft="51dp"
+        android:layout_marginTop="224dp"
+        android:layout_marginEnd="51dp"
+        android:layout_marginRight="51dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:color/holo_blue_light" />
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="308dp"
+        android:layout_marginBottom="250dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
-        android:background="@color/colorWhite"
-        android:textColor="@color/colorPrimary"
-        tools:layout_editor_absoluteX="91dp"
-        tools:layout_editor_absoluteY="296dp" />
-
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:background="@color/colorWhite"
-        android:textColor="@color/colorPrimary"
-        tools:layout_editor_absoluteX="91dp"
-        tools:layout_editor_absoluteY="474dp" />
+        android:text="과목을 입력하세요"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toTopOf="@+id/search_list"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <SearchView
-        android:layout_width="173dp"
-        android:layout_height="101dp"
-        android:background="@color/colorAccent"
-        tools:layout_editor_absoluteX="119dp"
-        tools:layout_editor_absoluteY="596dp" />
+        android:id="@+id/searchView2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="280dp"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="308dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <SearchView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:background="@color/colorBlack"
-        tools:layout_editor_absoluteX="279dp"
-        tools:layout_editor_absoluteY="297dp" />
-
-    <SearchView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:background="@color/colorBlack"
-        tools:layout_editor_absoluteX="279dp"
-        tools:layout_editor_absoluteY="474dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

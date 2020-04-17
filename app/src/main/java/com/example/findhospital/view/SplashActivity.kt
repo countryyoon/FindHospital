@@ -8,7 +8,7 @@ import com.example.findhospital.R
 
 class SplashActivity : AppCompatActivity() {
 
-    val DURATION:Long = 3000
+    val DURATION:Long = 2000
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
