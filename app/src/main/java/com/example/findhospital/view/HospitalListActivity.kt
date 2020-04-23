@@ -3,17 +3,46 @@ package com.example.findhospital.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import com.example.findhospital.R
 import com.example.findhospital.controller.HospitalListAdapter
 import com.example.findhospital.model.Hospital
+import com.example.findhospital.model.getHospital
+import com.example.findhospital.util.apiHospital
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 
 class HospitalListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hospital_list)
+
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://apis.data.go.kr/B552657/HsptlAsembySearchService/")
+            .addConverterFactory(SimpleXmlConverterFactory.create())
+            .build()
+
+        val call = retrofit.create(apiHospital::class.java).requestHospital(pNo = 1)
+
+        call.enqueue(object: Callback<getHospital> {
+            override fun onFailure(call: Call<getHospital>, t: Throwable) {
+                Log.e("########", t?.message)
+            }
+
+            override fun onResponse(call: Call<getHospital>, response: Response<getHospital>) {
+                val response = response.body()
+                Log.e("***********", response.toString())
+            }
+        })
+
+
 
 
         val Hospitals = arrayOf(Hospital("화전성모의원","032-566-0172","경기 고양시 덕양구 화랑로 20-2", "병원"),
@@ -29,14 +58,14 @@ class HospitalListActivity : AppCompatActivity() {
 
         var list : ListView = findViewById(R.id.hospital_list)
 
-        //var adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, Hospitals)
         var adapter = HospitalListAdapter(this, Hospitals)
 
         list.adapter = adapter
-        list.setOnItemClickListener({parent, itemView, position, id ->
-            var intent = Intent(this, HospitalDetailActivity::class.java)
-            startActivity(intent)
-        })
+        list.setOnItemClickListener{parent, itemView, position, id ->
+            val detailIntent = Intent(this, HospitalDetailActivity::class.java)
+            detailIntent.putExtra("dHospital", Hospitals[position])
+            startActivity(detailIntent)
+        }
 
     }
 }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FindHospital</string>
+    <string name="menu_account">계정</string>
 </resources>
