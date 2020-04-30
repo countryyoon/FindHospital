@@ -2,18 +2,17 @@ package com.example.findhospital.view
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.example.findhospital.R
-import com.example.findhospital.model.Hospital
-import com.example.findhospital.model.rItem
+import com.example.findhospital.model.lItem
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
@@ -39,22 +38,16 @@ class HospitalDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hospital_detail)
 
-        val hospital by lazy { intent.extras!!["detailHospital"] as rItem }
-        /*
-        val hName = intent.getStringExtra("detailhName")
-        val hAddress = intent.getStringExtra("detailhAddress")
-        val hNumber = intent.getStringExtra("detailhNumber")
-        val hSubject = intent.getStringExtra("detailhSubject")
-        val Lat = intent.getStringExtra("Lat")
-        val Lon = intent.getStringExtra("Lon")
-         */
+        val hospital by lazy { intent.extras!!["detailHospital"] as lItem }
 
-        val hLocation = LatLng(hospital.wgsLat!!.toDouble(), hospital.wgsLon!!.toDouble())
+        val hLocation = LatLng(hospital.ilat!!.toDouble(), hospital.ilon!!.toDouble())
 
-        detailHospitalName.text = hospital.hName
-        detailAddress.text = hospital.hAddress
-        detailNumber.text = hospital.dTel1
-        detailSubject.text = hospital.rSubject
+        detailHospitalName.text = hospital.dName
+        detailAddress.text = hospital.dAddr
+        detailNumber.text = hospital.dTel
+        detailSubject.text = hospital.dDivName
+
+        Log.e("%%%%%%%%", getMyLocation().toString())
 
 
         mapView.onCreate(savedInstanceState)

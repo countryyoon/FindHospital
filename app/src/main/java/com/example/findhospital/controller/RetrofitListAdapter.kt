@@ -7,12 +7,10 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.example.findhospital.R
-import com.example.findhospital.model.getHospital
 import com.example.findhospital.model.lItem
-import com.example.findhospital.model.rItem
-import retrofit2.Callback
 
-class RetrofitListAdapter(val context: Context, val hospitals: List<rItem>) : BaseAdapter() {
+
+class RetrofitListAdapter(val context: Context, val hospitals: List<lItem>) : BaseAdapter() {
 
     override fun getCount(): Int {
         return hospitals.size
@@ -28,10 +26,10 @@ class RetrofitListAdapter(val context: Context, val hospitals: List<rItem>) : Ba
 
     override fun getView(idx: Int, convertView: View?, parent: ViewGroup?): View {
         val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.list_element_retrofit, parent, false) as View
-        view.findViewById<TextView>(R.id.hospital_name2).text = hospitals[idx].hName //dName
-        view.findViewById<TextView>(R.id.hospital_address2).text = hospitals[idx].hAddress //dAddr
-        view.findViewById<TextView>(R.id.hospital_number2).text = hospitals[idx].dTel1 //dTel
-        view.findViewById<TextView>(R.id.hospital_subject2).text = hospitals[idx].rSubject //dDivName
+        view.findViewById<TextView>(R.id.hospital_name2).text = hospitals[idx].dName //hName //dName
+        view.findViewById<TextView>(R.id.hospital_address2).text = hospitals[idx].dAddr //hAddress //dAddr
+        view.findViewById<TextView>(R.id.hospital_number2).text = hospitals[idx].dTel //dTel1 //dTel
+        view.findViewById<TextView>(R.id.hospital_subject2).text = hospitals[idx].dDivName //rSubject //dDivName
 
         return view
     }

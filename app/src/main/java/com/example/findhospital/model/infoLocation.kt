@@ -58,10 +58,16 @@ data class lItem(
     var ilon: String? = null,
     @field:Element(name = "startTime", required = false)
     var sTime: String? = null,
+    @field:Element(name = "endTime", required = false)
+    var eTime: String? = null,
+    @field:Element(name = "hpid", required = false)
+    var hpId: String? = null,
     @field:Element(name = "cnt", required = false)
     var cnt: String? = null
 ) : Parcelable {
     constructor(source: Parcel) : this(
+        source.readString(),
+        source.readString(),
         source.readString(),
         source.readString(),
         source.readString(),
@@ -94,7 +100,9 @@ data class lItem(
         writeString(ilat)
         writeString(ilon)
         writeString(sTime)
+        writeString(eTime)
         writeString(cnt)
+        writeString(hpId)
     }
 
     companion object {

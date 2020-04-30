@@ -1,55 +1,69 @@
 package com.example.findhospital.view
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ListView
+import androidx.core.app.ActivityCompat
 import com.example.findhospital.R
-import com.example.findhospital.controller.HospitalListAdapter
 import com.example.findhospital.controller.RetrofitListAdapter
 import com.example.findhospital.model.*
-import com.example.findhospital.util.apiHospital
 import com.example.findhospital.util.apiLocationHospital
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.scalars.ScalarsConverterFactory
+import com.google.android.gms.maps.model.LatLng
+import retrofit2.*
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 
 class HospitalListActivity : AppCompatActivity() {
+
+    val PERMISSIONS = arrayOf(
+        Manifest.permission.ACCESS_COARSE_LOCATION,
+        Manifest.permission.ACCESS_FINE_LOCATION
+    )
+
+    val REQUEST_PERMISSION_CODE = 1
+
+    val DEFAULT_ZOOM_LEVEL = 17f
+
+    val CITY_HALL = LatLng(37.5662962, 126.97794509999994)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hospital_list)
         loadData()
-        /*
-        val Hospitals = arrayOf(Hospital("화전성모의원","032-566-0172","경기 고양시 덕양구 화랑로 20-2", "병원"),
-            Hospital("푸르메재단 넥슨어린이재활병원", "02-6070-9000", "서울 마포구 월드컵북로 494", "재활의학과"),
-            Hospital("서울특별시서북병원","02-3156-3000","서울 은평구 갈현로7길 49", "병원"),
-            Hospital("서울재활병원","02-6020-3000", "서울 은평구 갈현로11길 30", "재활의학과"),
-            Hospital("자인메디병원","1688-5533","경기 고양시 덕양구 중앙로 555", "종합병원"),
-            Hospital("키즈힐소아청소년과의원","02-3159-7576","경기 고양시 덕양구 향기로 14", "소아청소년과"),
-            Hospital("리드힐정형외과의원 상암점","02-6393-0888","서울 마포구 월드컵북로 361", "정형외과"),
-            Hospital("수이비인후과의원","02-373-5075","서울 마포구 상암산로1길 73", "이비인후과"),
-            Hospital("차앤유클리닉","02-3664-9003","서울 강서구 양천로 452", "피부과")
-        )
-
-        var list : ListView = findViewById(R.id.hospital_list)
-
-        var adapter = HospitalListAdapter(this, Hospitals)
-
-        list.adapter = adapter
-        list.setOnItemClickListener{parent, itemView, position, id ->
-            val detailIntent = Intent(this, HospitalDetailActivity::class.java)
-            detailIntent.putExtra("dHospital", Hospitals[position])
-            startActivity(detailIntent)
-        }
-         */
     }
 
-    fun setAdapter(hlist: List<rItem>){
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        //initMap()
+    }
+
+    fun hasPermissions(): Boolean {
+        for(permission in PERMISSIONS){
+            if(ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED){
+                return false
+            }
+
+        }
+        return true
+    }
+
+    @SuppressLint("MissingPermission")
+    fun getMyLocation(): LatLng{
+        val locationProvider: String = LocationManager.GPS_PROVIDER
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val lastKnownLocation: Location = locationManager.getLastKnownLocation(locationProvider)
+
+        return LatLng(lastKnownLocation.latitude, lastKnownLocation.longitude)
+    }
+
+    fun setAdapter(hlist: List<lItem>){
         val hAdapter = RetrofitListAdapter(this, hlist)
         var list : ListView = findViewById(R.id.hospital_list)
         list.adapter = hAdapter
@@ -67,15 +81,38 @@ class HospitalListActivity : AppCompatActivity() {
             .baseUrl("http://apis.data.go.kr/B552657/HsptlAsembySearchService/")
             .addConverterFactory(SimpleXmlConverterFactory.create())
             .build()
+        /*
+        if(hasPermissions()){
+            val call = retrofit.create(apiLocationHospital::class.java).requestLocationHospital(pNo = 1, mLat = getMyLocation().latitude, mLon = getMyLocation().longitude)
+        }
+        else{
+            val call = retrofit.create(apiLocationHospital::class.java).requestLocationHospital(pNo = 1)
+        }
 
-        val call = retrofit.create(apiHospital::class.java).requestHospital(pNo = 1)
+        when{
+            hasPermissions() -> {
+                val call = retrofit.create(apiLocationHospital::class.java).requestLocationHospital(pNo = 1, mLat = getMyLocation().latitude, mLon = getMyLocation().longitude)
 
-        call.enqueue(object: Callback<getHospital> {
-            override fun onFailure(call: Call<getHospital>, t: Throwable) {
+            }
+            else -> {
+                val call = retrofit.create(apiLocationHospital::class.java).requestLocationHospital(pNo = 1)
+            }
+        }*/
+
+        val nowLatLng : LatLng = getMyLocation()
+
+        Log.e("$$$$$$$$$", nowLatLng.toString())
+        /* 좌표값 제대로 받아왔는지 확인하고 우리나라 아니면 시청 기준으로 되던가 아니면 검색 안되는 옵션도 필요함*/
+
+        //val call = retrofit.create(apiLocationHospital::class.java).requestLocationHospital(pNo = 1, mLat = getMyLocation().latitude, mLon = getMyLocation().longitude)
+        val call = retrofit.create(apiLocationHospital::class.java).requestLocationHospital(pNo = 1)
+
+        call.enqueue(object: Callback<infoLocation> {
+            override fun onFailure(call: Call<infoLocation>, t: Throwable) {
                 Log.e("####FailureMessage####", t?.message)
             }
 
-            override fun onResponse(call: Call<getHospital>, response: Response<getHospital>) {
+            override fun onResponse(call: Call<infoLocation>, response: Response<infoLocation>) {
                 if(response.isSuccessful){
                     var body = response.body()
                     body?.let{
@@ -89,8 +126,8 @@ class HospitalListActivity : AppCompatActivity() {
 
             }
         })
-
-
-
     }
+
+
+
 }

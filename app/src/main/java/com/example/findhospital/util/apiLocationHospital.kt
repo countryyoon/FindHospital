@@ -1,5 +1,7 @@
 package com.example.findhospital.util
 
+import com.example.findhospital.model.infoLocation
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -11,5 +13,5 @@ interface apiLocationHospital {
         @Query("WGS84_LON") mLon: Double = 126.97794509999994,
         @Query("pageNo") pNo: Int,
         @Query("numOfRows") nRow: Int = 10
-    )
+    ): Call<infoLocation>
 }
