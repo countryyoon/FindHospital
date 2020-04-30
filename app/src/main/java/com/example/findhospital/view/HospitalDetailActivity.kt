@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.example.findhospital.R
 import com.example.findhospital.model.Hospital
+import com.example.findhospital.model.rItem
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
@@ -38,28 +39,39 @@ class HospitalDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hospital_detail)
 
-        val hospital by lazy {intent.extras!!["dHospital"] as Hospital}
+        val hospital by lazy { intent.extras!!["detailHospital"] as rItem }
+        /*
+        val hName = intent.getStringExtra("detailhName")
+        val hAddress = intent.getStringExtra("detailhAddress")
+        val hNumber = intent.getStringExtra("detailhNumber")
+        val hSubject = intent.getStringExtra("detailhSubject")
+        val Lat = intent.getStringExtra("Lat")
+        val Lon = intent.getStringExtra("Lon")
+         */
+
+        val hLocation = LatLng(hospital.wgsLat!!.toDouble(), hospital.wgsLon!!.toDouble())
 
         detailHospitalName.text = hospital.hName
         detailAddress.text = hospital.hAddress
-        detailNumber.text = hospital.hNumber
-        detailSubject.text = hospital.hSubject
+        detailNumber.text = hospital.dTel1
+        detailSubject.text = hospital.rSubject
+
 
         mapView.onCreate(savedInstanceState)
 
         if(hasPermissions()){
-            initMap()
+            initMap(hLocation)
         } else{
             ActivityCompat.requestPermissions(this, PERMISSIONS, REQUEST_PERMISSION_CODE)
         }
 
-        myLocationButton.setOnClickListener{ onMyLocationButtonClick() }
+        myLocationButton.setOnClickListener{ onMyLocationButtonClick(hLocation) }
 
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        initMap()
+        //initMap()
     }
 
     fun hasPermissions(): Boolean {
@@ -73,7 +85,7 @@ class HospitalDetailActivity : AppCompatActivity() {
     }
 
     @SuppressLint("MissingPermission")
-    fun initMap(){
+    fun initMap(hLoca : LatLng){
         mapView.getMapAsync{
             googleMap = it
             it.uiSettings.isMyLocationButtonEnabled = false
@@ -81,7 +93,7 @@ class HospitalDetailActivity : AppCompatActivity() {
             when{
                 hasPermissions() -> {
                     it.isMyLocationEnabled = true
-                    it.moveCamera(CameraUpdateFactory.newLatLngZoom(getMyLocation(), DEFAULT_ZOOM_LEVEL))
+                    it.moveCamera(CameraUpdateFactory.newLatLngZoom(hLoca, DEFAULT_ZOOM_LEVEL))
                 }
                 else -> {
                     it.moveCamera(CameraUpdateFactory.newLatLngZoom(CITY_HALL, DEFAULT_ZOOM_LEVEL))
@@ -99,9 +111,9 @@ class HospitalDetailActivity : AppCompatActivity() {
         return LatLng(lastKnownLocation.latitude, lastKnownLocation.longitude)
     }
 
-    fun onMyLocationButtonClick(){
+    fun onMyLocationButtonClick(hLoca: LatLng){
         when{
-            hasPermissions() -> googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(getMyLocation(), DEFAULT_ZOOM_LEVEL))
+            hasPermissions() -> googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(hLoca, DEFAULT_ZOOM_LEVEL))
             else -> Toast.makeText(applicationContext, "위치사용권한 설정에 동의해주세요", Toast.LENGTH_LONG).show()
         }
     }

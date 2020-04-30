@@ -4,17 +4,18 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ArrayAdapter
 import android.widget.ListView
 import com.example.findhospital.R
 import com.example.findhospital.controller.HospitalListAdapter
-import com.example.findhospital.model.Hospital
-import com.example.findhospital.model.getHospital
+import com.example.findhospital.controller.RetrofitListAdapter
+import com.example.findhospital.model.*
 import com.example.findhospital.util.apiHospital
+import com.example.findhospital.util.apiLocationHospital
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 
 class HospitalListActivity : AppCompatActivity() {
@@ -22,29 +23,8 @@ class HospitalListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hospital_list)
-
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://apis.data.go.kr/B552657/HsptlAsembySearchService/")
-            .addConverterFactory(SimpleXmlConverterFactory.create())
-            .build()
-
-        val call = retrofit.create(apiHospital::class.java).requestHospital(pNo = 1)
-
-        call.enqueue(object: Callback<getHospital> {
-            override fun onFailure(call: Call<getHospital>, t: Throwable) {
-                Log.e("########", t?.message)
-            }
-
-            override fun onResponse(call: Call<getHospital>, response: Response<getHospital>) {
-                val response = response.body()
-                Log.e("***********", response.toString())
-            }
-        })
-
-
-
-
+        loadData()
+        /*
         val Hospitals = arrayOf(Hospital("화전성모의원","032-566-0172","경기 고양시 덕양구 화랑로 20-2", "병원"),
             Hospital("푸르메재단 넥슨어린이재활병원", "02-6070-9000", "서울 마포구 월드컵북로 494", "재활의학과"),
             Hospital("서울특별시서북병원","02-3156-3000","서울 은평구 갈현로7길 49", "병원"),
@@ -66,6 +46,51 @@ class HospitalListActivity : AppCompatActivity() {
             detailIntent.putExtra("dHospital", Hospitals[position])
             startActivity(detailIntent)
         }
+         */
+    }
+
+    fun setAdapter(hlist: List<rItem>){
+        val hAdapter = RetrofitListAdapter(this, hlist)
+        var list : ListView = findViewById(R.id.hospital_list)
+        list.adapter = hAdapter
+
+        list.setOnItemClickListener{parent, itemView, position, id ->
+            val detailIntent = Intent(this, HospitalDetailActivity::class.java)
+            detailIntent.putExtra("detailHospital", hlist[position])
+            startActivity(detailIntent)
+        }
+    }
+
+    fun loadData(){
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://apis.data.go.kr/B552657/HsptlAsembySearchService/")
+            .addConverterFactory(SimpleXmlConverterFactory.create())
+            .build()
+
+        val call = retrofit.create(apiHospital::class.java).requestHospital(pNo = 1)
+
+        call.enqueue(object: Callback<getHospital> {
+            override fun onFailure(call: Call<getHospital>, t: Throwable) {
+                Log.e("####FailureMessage####", t?.message)
+            }
+
+            override fun onResponse(call: Call<getHospital>, response: Response<getHospital>) {
+                if(response.isSuccessful){
+                    var body = response.body()
+                    body?.let{
+                        val hlist = it.rBody!!.itemlist!!.elementItem!!
+                        Log.e("****SuccessResult****", hlist.toString())
+                        setAdapter(hlist)
+
+                    }
+
+                }
+
+            }
+        })
+
+
 
     }
 }

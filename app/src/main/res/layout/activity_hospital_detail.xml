@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_margin="5dp"
-        android:layout_below="@id/detailNumber"
+        android:layout_below="@id/detailSubject"
         android:gravity="center_vertical"
         android:text="TextView"
         android:textColor="@color/colorBlack"
@@ -35,7 +35,7 @@
 
     <TextView
         android:id="@+id/detailNumber"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_margin="5dp"
         android:layout_below="@id/detailHospitalName"
@@ -47,10 +47,9 @@
     <TextView
         android:id="@+id/detailSubject"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:layout_below="@id/detailHospitalName"
-        android:layout_toRightOf="@id/detailNumber"
+        android:layout_below="@id/detailNumber"
         android:gravity="center_vertical"
         android:text="TextView"
         android:textColor="@color/colorBlack"
