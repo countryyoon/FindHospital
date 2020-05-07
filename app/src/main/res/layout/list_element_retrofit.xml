@@ -5,7 +5,7 @@
     <TextView
         android:id="@+id/hospital_name2"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:text="TextView"
         android:textColor="@color/colorBlack"
@@ -14,7 +14,7 @@
     <TextView
         android:id="@+id/hospital_address2"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:layout_below="@id/hospital_number2"
         android:text="TextView"
@@ -24,7 +24,7 @@
     <TextView
         android:id="@+id/hospital_number2"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:layout_below="@id/hospital_name2"
         android:layout_toRightOf="@id/hospital_subject2"
@@ -35,7 +35,7 @@
     <TextView
         android:id="@+id/hospital_subject2"
         android:layout_width="180dp"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:layout_below="@id/hospital_name2"
         android:text="TextView"

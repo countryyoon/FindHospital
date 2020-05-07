@@ -26,9 +26,27 @@ data class lbody(
 
 @Root(name = "items", strict = false)
 data class lItems(
-    @field:ElementList(name = "item",inline = true ,required = false)
-    var elementItem: List<lItem> ?= null
-)
+    @field:ElementList(name = "item", inline = true, required = false)
+    var elementItem: List<lItem>? = null
+) : Parcelable{
+    constructor(source: Parcel) : this(
+    source.createTypedArrayList(lItem.CREATOR)
+    )
+
+    override fun describeContents() = 0
+
+    override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
+        writeTypedList(elementItem)
+    }
+
+    companion object {
+        @JvmField
+        val CREATOR: Parcelable.Creator<lItems> = object : Parcelable.Creator<lItems> {
+            override fun createFromParcel(source: Parcel): lItems = lItems(source)
+            override fun newArray(size: Int): Array<lItems?> = arrayOfNulls(size)
+        }
+    }
+}
 
 @Root(name = "item", strict = true)
 data class lItem(

@@ -10,6 +10,8 @@ import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ListView
 import androidx.core.app.ActivityCompat
 import com.example.findhospital.R
@@ -33,11 +35,31 @@ class HospitalListActivity : AppCompatActivity() {
 
     val CITY_HALL = LatLng(37.5662962, 126.97794509999994)
 
+    var intentlist: lItems ?= null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hospital_list)
         loadData()
     }
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item?.itemId){
+            R.id.action_map_button -> {
+                val mapIntent = Intent(this, MapDPActivity::class.java)
+                mapIntent.putExtra("mapList", intentlist)
+                startActivity(mapIntent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -63,6 +85,7 @@ class HospitalListActivity : AppCompatActivity() {
         return LatLng(lastKnownLocation.latitude, lastKnownLocation.longitude)
     }
 
+
     fun setAdapter(hlist: List<lItem>){
         val hAdapter = RetrofitListAdapter(this, hlist)
         var list : ListView = findViewById(R.id.hospital_list)
@@ -76,36 +99,18 @@ class HospitalListActivity : AppCompatActivity() {
     }
 
     fun loadData(){
-
         val retrofit = Retrofit.Builder()
             .baseUrl("http://apis.data.go.kr/B552657/HsptlAsembySearchService/")
             .addConverterFactory(SimpleXmlConverterFactory.create())
             .build()
-        /*
-        if(hasPermissions()){
-            val call = retrofit.create(apiLocationHospital::class.java).requestLocationHospital(pNo = 1, mLat = getMyLocation().latitude, mLon = getMyLocation().longitude)
-        }
-        else{
-            val call = retrofit.create(apiLocationHospital::class.java).requestLocationHospital(pNo = 1)
-        }
-
-        when{
-            hasPermissions() -> {
-                val call = retrofit.create(apiLocationHospital::class.java).requestLocationHospital(pNo = 1, mLat = getMyLocation().latitude, mLon = getMyLocation().longitude)
-
-            }
-            else -> {
-                val call = retrofit.create(apiLocationHospital::class.java).requestLocationHospital(pNo = 1)
-            }
-        }*/
 
         val nowLatLng : LatLng = getMyLocation()
 
         Log.e("$$$$$$$$$", nowLatLng.toString())
         /* 좌표값 제대로 받아왔는지 확인하고 우리나라 아니면 시청 기준으로 되던가 아니면 검색 안되는 옵션도 필요함*/
 
-        //val call = retrofit.create(apiLocationHospital::class.java).requestLocationHospital(pNo = 1, mLat = getMyLocation().latitude, mLon = getMyLocation().longitude)
-        val call = retrofit.create(apiLocationHospital::class.java).requestLocationHospital(pNo = 1)
+        val call = retrofit.create(apiLocationHospital::class.java).requestLocationHospital(pNo = 1, mLat = getMyLocation().latitude, mLon = getMyLocation().longitude)
+        //val call = retrofit.create(apiLocationHospital::class.java).requestLocationHospital(pNo = 1)
 
         call.enqueue(object: Callback<infoLocation> {
             override fun onFailure(call: Call<infoLocation>, t: Throwable) {
@@ -116,6 +121,7 @@ class HospitalListActivity : AppCompatActivity() {
                 if(response.isSuccessful){
                     var body = response.body()
                     body?.let{
+                        intentlist = it.rBody!!.itemlist
                         val hlist = it.rBody!!.itemlist!!.elementItem!!
                         Log.e("****SuccessResult****", hlist.toString())
                         setAdapter(hlist)

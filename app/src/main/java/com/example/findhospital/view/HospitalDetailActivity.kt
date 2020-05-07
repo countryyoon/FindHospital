@@ -4,6 +4,8 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.location.Location
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +17,9 @@ import com.example.findhospital.R
 import com.example.findhospital.model.lItem
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_hospital_detail.*
 
 class HospitalDetailActivity : AppCompatActivity() {
@@ -62,6 +66,11 @@ class HospitalDetailActivity : AppCompatActivity() {
 
     }
 
+    val bitmap by lazy {
+        val drawable = resources.getDrawable(R.drawable.blus_cross) as BitmapDrawable
+        Bitmap.createScaledBitmap(drawable.bitmap, 64, 64, false)
+    }
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         //initMap()
@@ -92,6 +101,7 @@ class HospitalDetailActivity : AppCompatActivity() {
                     it.moveCamera(CameraUpdateFactory.newLatLngZoom(CITY_HALL, DEFAULT_ZOOM_LEVEL))
                 }
             }
+            addMarkers(hLoca)
         }
     }
 
@@ -129,6 +139,14 @@ class HospitalDetailActivity : AppCompatActivity() {
     override fun onLowMemory() {
         super.onLowMemory()
         mapView.onLowMemory()
+    }
+
+    fun addMarkers(DetailLatLng: LatLng){
+        googleMap?.addMarker(
+            MarkerOptions()
+                .position(LatLng(DetailLatLng.latitude, DetailLatLng.longitude))
+                .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+        )
     }
 
 }

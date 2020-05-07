@@ -41,7 +41,9 @@
         <activity android:name=".view.HospitalDetailActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             />
-        <activity android:name=".view.MapDPActivity" />
+        <activity android:name=".view.MapDPActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            />
         <activity android:name=".view.HospitalListActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
         </activity>
