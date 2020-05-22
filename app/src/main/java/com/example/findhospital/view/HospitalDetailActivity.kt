@@ -2,7 +2,9 @@ package com.example.findhospital.view
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
@@ -11,7 +13,9 @@ import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import com.example.findhospital.R
 import com.example.findhospital.model.lItem
@@ -21,6 +25,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_hospital_detail.*
+import java.util.*
 
 class HospitalDetailActivity : AppCompatActivity() {
 
@@ -42,6 +47,7 @@ class HospitalDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hospital_detail)
 
+        // 인텐트에서 넘겨받은 병원 정보 가져오기
         val hospital by lazy { intent.extras!!["detailHospital"] as lItem }
 
         val hLocation = LatLng(hospital.ilat!!.toDouble(), hospital.ilon!!.toDouble())
@@ -54,6 +60,7 @@ class HospitalDetailActivity : AppCompatActivity() {
         Log.e("%%%%%%%%", getMyLocation().toString())
 
 
+        //지도 생성
         mapView.onCreate(savedInstanceState)
 
         if(hasPermissions()){
@@ -62,9 +69,19 @@ class HospitalDetailActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, PERMISSIONS, REQUEST_PERMISSION_CODE)
         }
 
+
+        // 버튼 동작
         myLocationButton.setOnClickListener{ onMyLocationButtonClick(hLocation) }
 
+        reservationButton.setOnClickListener {
+
+            val reserveIntent = Intent(this, reserveCalenderActivity::class.java)
+            reserveIntent.putExtra("rsvHospitalName", hospital.dName)
+            startActivity(reserveIntent)
+        }
+
     }
+
 
     val bitmap by lazy {
         val drawable = resources.getDrawable(R.drawable.blus_cross) as BitmapDrawable

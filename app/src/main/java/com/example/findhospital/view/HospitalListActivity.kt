@@ -104,10 +104,16 @@ class HospitalListActivity : AppCompatActivity() {
             .addConverterFactory(SimpleXmlConverterFactory.create())
             .build()
 
-        val nowLatLng : LatLng = getMyLocation()
+        var nowLatLng : LatLng = getMyLocation()
+
+        if (nowLatLng.longitude <124 || nowLatLng.longitude > 132){
+            nowLatLng = CITY_HALL
+        }
 
         Log.e("$$$$$$$$$", nowLatLng.toString())
         /* 좌표값 제대로 받아왔는지 확인하고 우리나라 아니면 시청 기준으로 되던가 아니면 검색 안되는 옵션도 필요함*/
+
+
 
         val call = retrofit.create(apiLocationHospital::class.java).requestLocationHospital(pNo = 1, mLat = getMyLocation().latitude, mLon = getMyLocation().longitude)
         //val call = retrofit.create(apiLocationHospital::class.java).requestLocationHospital(pNo = 1)
