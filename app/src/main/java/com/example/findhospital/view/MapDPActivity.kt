@@ -14,8 +14,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.example.findhospital.R
-import com.example.findhospital.model.lItem
-import com.example.findhospital.model.lItems
+import com.example.findhospital.model.rItem
+import com.example.findhospital.model.rItems
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -44,7 +44,7 @@ class MapDPActivity : AppCompatActivity() {
 
         mapViewList.onCreate(savedInstanceState)
 
-        val mapHospital by lazy { intent.extras!!["mapList"] as lItems }
+        val mapHospital by lazy { intent.extras!!["mapList"] as rItems }
 
         val mHos = mapHospital.elementItem
 
@@ -68,7 +68,7 @@ class MapDPActivity : AppCompatActivity() {
     }
 
     @SuppressLint("MissingPermission")
-    fun initMap(hList: List<lItem>?){
+    fun initMap(hList: List<rItem>?){
         mapViewList.getMapAsync {
             googleMap = it
 
@@ -103,12 +103,12 @@ class MapDPActivity : AppCompatActivity() {
         }
     }
 
-    fun mapMarking(mapHosList: List<lItem>?){
+    fun mapMarking(mapHosList: List<rItem>?){
         val lSize: Int = mapHosList!!.size
 
         for(i in 0..lSize-1){
-            var lat = mapHosList.get(i).ilat
-            var lon = mapHosList.get(i).ilon
+            var lat = mapHosList.get(i).YPos
+            var lon = mapHosList.get(i).XPos
             addMarkers(LatLng(lat!!.toDouble(), lon!!.toDouble()))
         }
 

@@ -15,9 +15,9 @@ import android.view.MenuItem
 import android.widget.ListView
 import androidx.core.app.ActivityCompat
 import com.example.findhospital.R
-import com.example.findhospital.controller.RetrofitListAdapter
+import com.example.findhospital.controller.HospitalListAdapter
 import com.example.findhospital.model.*
-import com.example.findhospital.util.apiLocationHospital
+import com.example.findhospital.util.LocationHospital
 import com.google.android.gms.maps.model.LatLng
 import retrofit2.*
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
@@ -35,7 +35,7 @@ class HospitalListActivity : AppCompatActivity() {
 
     val CITY_HALL = LatLng(37.5662962, 126.97794509999994)
 
-    var intentlist: lItems ?= null
+    var hoslist: rItems ?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +53,7 @@ class HospitalListActivity : AppCompatActivity() {
         when(item?.itemId){
             R.id.action_map_button -> {
                 val mapIntent = Intent(this, MapDPActivity::class.java)
-                mapIntent.putExtra("mapList", intentlist)
+                mapIntent.putExtra("mapList", hoslist)
                 startActivity(mapIntent)
             }
         }
@@ -80,16 +80,21 @@ class HospitalListActivity : AppCompatActivity() {
     fun getMyLocation(): LatLng{
         val locationProvider: String = LocationManager.GPS_PROVIDER
         val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        val lastKnownLocation: Location = locationManager.getLastKnownLocation(locationProvider)
+        val lastKnownLocation: Location? = locationManager.getLastKnownLocation(locationProvider)
 
-        return LatLng(lastKnownLocation.latitude, lastKnownLocation.longitude)
+
+
+        return if (lastKnownLocation == null){
+            CITY_HALL
+        } else{
+            LatLng(lastKnownLocation.latitude, lastKnownLocation.longitude)
+        }
     }
 
-
-    fun setAdapter(hlist: List<lItem>){
-        val hAdapter = RetrofitListAdapter(this, hlist)
+    fun setAdapter2(hlist: List<rItem>){
+        val hLocAdapter = HospitalListAdapter(this, hlist)
         var list : ListView = findViewById(R.id.hospital_list)
-        list.adapter = hAdapter
+        list.adapter = hLocAdapter
 
         list.setOnItemClickListener{parent, itemView, position, id ->
             val detailIntent = Intent(this, HospitalDetailActivity::class.java)
@@ -98,9 +103,10 @@ class HospitalListActivity : AppCompatActivity() {
         }
     }
 
+
     fun loadData(){
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://apis.data.go.kr/B552657/HsptlAsembySearchService/")
+        val retrofits = Retrofit.Builder()
+            .baseUrl("http://apis.data.go.kr/B551182/hospInfoService/")
             .addConverterFactory(SimpleXmlConverterFactory.create())
             .build()
 
@@ -113,33 +119,24 @@ class HospitalListActivity : AppCompatActivity() {
         Log.e("$$$$$$$$$", nowLatLng.toString())
         /* 좌표값 제대로 받아왔는지 확인하고 우리나라 아니면 시청 기준으로 되던가 아니면 검색 안되는 옵션도 필요함*/
 
+        val call2 = retrofits.create(LocationHospital::class.java).requestHospital(xPos = getMyLocation().longitude, yPos = getMyLocation().latitude)
 
-
-        val call = retrofit.create(apiLocationHospital::class.java).requestLocationHospital(pNo = 1, mLat = getMyLocation().latitude, mLon = getMyLocation().longitude)
-        //val call = retrofit.create(apiLocationHospital::class.java).requestLocationHospital(pNo = 1)
-
-        call.enqueue(object: Callback<infoLocation> {
-            override fun onFailure(call: Call<infoLocation>, t: Throwable) {
+        call2.enqueue(object: Callback<hosLocation>{
+            override fun onFailure(call: Call<hosLocation>, t: Throwable) {
                 Log.e("####FailureMessage####", t?.message)
             }
 
-            override fun onResponse(call: Call<infoLocation>, response: Response<infoLocation>) {
+            override fun onResponse(call: Call<hosLocation>, response: Response<hosLocation>) {
                 if(response.isSuccessful){
                     var body = response.body()
                     body?.let{
-                        intentlist = it.rBody!!.itemlist
+                        hoslist = it.rBody!!.itemlist
                         val hlist = it.rBody!!.itemlist!!.elementItem!!
-                        Log.e("****SuccessResult****", hlist.toString())
-                        setAdapter(hlist)
-
+                        Log.e("^^^^^secondTest", body.toString())
+                        setAdapter2(hlist)
                     }
-
                 }
-
             }
         })
     }
-
-
-
 }

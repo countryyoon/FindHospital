@@ -45,13 +45,16 @@
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity
             android:name=".view.HospitalListActivity"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity
             android:name=".view.MainActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".view.reserveCalenderActivity"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity
+            android:name=".view.reserveActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
     </application>
 
 </manifest>

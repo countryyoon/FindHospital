@@ -90,5 +90,45 @@
         android:layout_margin="10dp"
         android:layout_below="@+id/reserveText"/>
 
+    <Button
+        android:id="@+id/lookupButton"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/reserveHospitalName"
+        android:layout_toRightOf="@+id/datePick"
+        android:text="날짜 예약 조회" />
+
+    <ListView
+        android:id="@+id/timelist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="1px"
+        android:divider="@color/colorBlack"
+        android:layout_below="@+id/dayReserve"
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:id="@+id/dayReserve"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text=""
+        android:textSize="22sp"
+        android:textColor="@color/colorBlack"
+        android:layout_below="@+id/reserveDoneButton"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/lookupReserve"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timelist"
+        android:text=""
+        android:textSize="18sp"
+        android:textColor="@color/colorBlack"
+        android:layout_marginTop="10dp"/>
+
+
+
 
 </RelativeLayout>

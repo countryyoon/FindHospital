@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -86,5 +91,687 @@
         android:layout_marginBottom="5dp"
         android:text="예약하기" />
 
+    <View
+        android:id="@+id/displayline"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/reservationButton"
+        android:background="@color/colorBlack"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/AssesmentDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/displayline"
+        android:text="병원평가등급정보"
+        android:textColor="@color/colorBlack"
+        android:textSize="25sp"
+        android:textAlignment="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/textasmGrd1"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="급성심근경색증"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/AssesmentDisplay"/>
+
+    <TextView
+        android:id="@+id/asmGrd1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/AssesmentDisplay"
+        android:layout_toRightOf="@id/textasmGrd1"/>
+
+    <TextView
+        android:id="@+id/textasmGrd2"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="급성기뇌졸중"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd1"/>
+
+    <TextView
+        android:id="@+id/asmGrd2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd1"
+        android:layout_toRightOf="@id/textasmGrd2"/>
+
+    <TextView
+        android:id="@+id/textasmGrd3"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="고혈압병원평가"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd2"/>
+
+    <TextView
+        android:id="@+id/asmGrd3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd2"
+        android:layout_toRightOf="@id/textasmGrd3"/>
+
+    <TextView
+        android:id="@+id/textasmGrd4"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="혈액투석병원"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd3"/>
+
+    <TextView
+        android:id="@+id/asmGrd4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd3"
+        android:layout_toRightOf="@id/textasmGrd4"/>
+
+    <TextView
+        android:id="@+id/textasmGrd5"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="의료급여정신과"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd4"/>
+
+    <TextView
+        android:id="@+id/asmGrd5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd4"
+        android:layout_toRightOf="@id/textasmGrd5"/>
+
+    <TextView
+        android:id="@+id/textasmGrd6"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="수술예방항생제"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd5"/>
+
+    <TextView
+        android:id="@+id/asmGrd6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd5"
+        android:layout_toRightOf="@id/textasmGrd6"/>
+
+    <TextView
+        android:id="@+id/textasmGrd7"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="고관절치환술진료량"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd6"/>
+
+    <TextView
+        android:id="@+id/asmGrd7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd6"
+        android:layout_toRightOf="@id/textasmGrd7"/>
+
+    <TextView
+        android:id="@+id/textasmGrd8"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="췌장암진료량"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd7"/>
+
+    <TextView
+        android:id="@+id/asmGrd8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd7"
+        android:layout_toRightOf="@id/textasmGrd8"/>
+
+    <TextView
+        android:id="@+id/textasmGrd9"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="식도암진료량"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd8"/>
+
+    <TextView
+        android:id="@+id/asmGrd9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd8"
+        android:layout_toRightOf="@id/textasmGrd9"/>
+
+    <TextView
+        android:id="@+id/textasmGrd10"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="골수이식진료량"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd9"/>
+
+    <TextView
+        android:id="@+id/asmGrd10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd9"
+        android:layout_toRightOf="@id/textasmGrd10"/>
+
+    <TextView
+        android:id="@+id/textasmGrd11"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="위암진료량"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd10"/>
+
+    <TextView
+        android:id="@+id/asmGrd11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd10"
+        android:layout_toRightOf="@id/textasmGrd11"/>
+
+    <TextView
+        android:id="@+id/textasmGrd12"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="간암진료량"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd11"/>
+
+    <TextView
+        android:id="@+id/asmGrd12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd11"
+        android:layout_toRightOf="@id/textasmGrd12"/>
+
+    <TextView
+        android:id="@+id/textasmGrd13"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="제왕절개분만"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd12"/>
+
+    <TextView
+        android:id="@+id/asmGrd13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd12"
+        android:layout_toRightOf="@id/textasmGrd13"/>
+
+    <TextView
+        android:id="@+id/textasmGrd14"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="CABG(관상동맥우회술)"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd13"/>
+
+    <TextView
+        android:id="@+id/asmGrd14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd13"
+        android:layout_toRightOf="@id/textasmGrd14"/>
+
+    <TextView
+        android:id="@+id/textasmGrd15"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="간암진료결과"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd14"/>
+
+    <TextView
+        android:id="@+id/asmGrd15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd14"
+        android:layout_toRightOf="@id/textasmGrd15"/>
+
+    <TextView
+        android:id="@+id/textasmGrd16"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="위암진료결과"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd15"/>
+
+    <TextView
+        android:id="@+id/asmGrd16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd15"
+        android:layout_toRightOf="@id/textasmGrd16"/>
+
+    <TextView
+        android:id="@+id/textasmGrd17"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="항생제처방을"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd16"/>
+
+    <TextView
+        android:id="@+id/asmGrd17"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd16"
+        android:layout_toRightOf="@id/textasmGrd17"/>
+
+    <TextView
+        android:id="@+id/textasmGrd18"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="주사제처방을"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd17"/>
+
+    <TextView
+        android:id="@+id/asmGrd18"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd17"
+        android:layout_toRightOf="@id/textasmGrd18"/>
+
+    <TextView
+        android:id="@+id/textasmGrd19"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="약품품목수"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd18"/>
+
+    <TextView
+        android:id="@+id/asmGrd19"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd18"
+        android:layout_toRightOf="@id/textasmGrd19"/>
+
+    <TextView
+        android:id="@+id/textasmGrd20"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="요양병원평가"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd19"/>
+
+    <TextView
+        android:id="@+id/asmGrd20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd19"
+        android:layout_toRightOf="@id/textasmGrd20"/>
+
+    <TextView
+        android:id="@+id/textasmGrd21"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="처방약품비"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd20"/>
+
+    <TextView
+        android:id="@+id/asmGrd21"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd20"
+        android:layout_toRightOf="@id/textasmGrd21"/>
+
+    <TextView
+        android:id="@+id/textasmGrd22"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="당뇨병"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd21"/>
+
+    <TextView
+        android:id="@+id/asmGrd22"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd21"
+        android:layout_toRightOf="@id/textasmGrd22"/>
+
+    <TextView
+        android:id="@+id/textasmGrd23"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="대장암"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd22"/>
+
+    <TextView
+        android:id="@+id/asmGrd23"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd22"
+        android:layout_toRightOf="@id/textasmGrd23"/>
+
+    <TextView
+        android:id="@+id/textasmGrd24"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="유아소아중이염"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd23"/>
+
+    <TextView
+        android:id="@+id/asmGrd24"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd23"
+        android:layout_toRightOf="@id/textasmGrd24"/>
+
+    <TextView
+        android:id="@+id/textasmGrd25"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="유방암"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd24"/>
+
+    <TextView
+        android:id="@+id/asmGrd25"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd24"
+        android:layout_toRightOf="@id/textasmGrd25"/>
+
+    <TextView
+        android:id="@+id/textasmGrd26"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="폐암"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd25"/>
+
+    <TextView
+        android:id="@+id/asmGrd26"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd25"
+        android:layout_toRightOf="@id/textasmGrd26"/>
+
+    <TextView
+        android:id="@+id/textasmGrd27"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="천식병원"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd26"/>
+
+    <TextView
+        android:id="@+id/asmGrd27"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd26"
+        android:layout_toRightOf="@id/textasmGrd27"/>
+
+    <TextView
+        android:id="@+id/textasmGrd28"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="만성폐색성폐질환"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd27"/>
+
+    <TextView
+        android:id="@+id/asmGrd28"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd27"
+        android:layout_toRightOf="@id/textasmGrd28"/>
+
+    <TextView
+        android:id="@+id/textasmGrd29"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="폐렴"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd28"/>
+
+    <TextView
+        android:id="@+id/asmGrd29"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd28"
+        android:layout_toRightOf="@id/textasmGrd29"/>
+
+    <TextView
+        android:id="@+id/textasmGrd30"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="중환자실"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textasmGrd29"/>
+
+    <TextView
+        android:id="@+id/asmGrd30"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="TextView"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/asmGrd29"
+        android:layout_toRightOf="@id/textasmGrd30"/>
+
 
 </RelativeLayout>
+</ScrollView>
