@@ -45,10 +45,11 @@ class reserveCalenderActivity : AppCompatActivity(){
         }
 
         reserveDoneButton.setOnClickListener {
-            saveReserveDayTime()
-
             if(dateEdit.text.toString()=="Date Pick" || timeEdit.text.toString()=="Time Pick"){
                 Toast.makeText(this, "날짜와 시간을 입력하십시오.", Toast.LENGTH_LONG).show()
+            }
+            else{
+                saveReserveDayTime()
             }
         }
 
@@ -194,8 +195,8 @@ class reserveCalenderActivity : AppCompatActivity(){
         hosText.put("rText", bookText)
         hosText.put("user", bookUser)
 
-        userText.put("rHosName", hospitalName)
-        userText.put("rDate", bookDate)
+        //userText.put("rHosName", hospitalName)
+        //userText.put("rDate", bookDate)
         userText.put("rTime", bookTime)
         userText.put("rText", bookText)
 
@@ -211,7 +212,7 @@ class reserveCalenderActivity : AppCompatActivity(){
                     hDatabase.child("hospital").child(hospitalName).child(bookDate).child(bookTime).push().setValue(hosText)
 
                     uDatabase = FirebaseDatabase.getInstance().getReference()
-                    uDatabase.child("user").child(bookUser).push().setValue(userText)
+                    uDatabase.child("user").child(bookUser).child(hospitalName).child(bookDate).child(bookTime).push().setValue(userText)
 
                     Toast.makeText(this@reserveCalenderActivity, "예약이 완료되었습니다.", Toast.LENGTH_LONG).show()
                     finish()
