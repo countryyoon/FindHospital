@@ -9,6 +9,8 @@ import android.util.Log
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
@@ -27,6 +29,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var drawerLayout: DrawerLayout
     lateinit var navView: NavigationView
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,6 +39,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawerLayout = findViewById(R.id.drawer_layout)
         navView = findViewById(R.id.nav_view)
+        var header: View = navView.getHeaderView(0)
+        var idTextView: TextView = header.findViewById(R.id.useriddisplay)
+
 
         val toggle = ActionBarDrawerToggle(
             this, drawerLayout, toolbar, 0, 0
@@ -49,32 +55,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             startActivity(intent)
         }
 
-        //useriddisplay.text = "Please Login"
 
+        var user = FirebaseAuth.getInstance().currentUser
+        var rUser: String = ""
+        if(user != null){
+            var name = user.email!!
+            Log.e("######this is user2: ", user.toString())
+
+            var indexarray = name.split("@")
+            rUser = indexarray[0]
+            Log.e("######this is user: ", rUser)
+            idTextView.text = rUser
+        }
+        else{
+            idTextView.text = "Please Login"
+        }
 
     }
 
-
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        Log.e("tagtagtag", "tttt")
-//        var user = FirebaseAuth.getInstance().currentUser
-//        var rUser: String = ""
-//
-//        if(user != null){
-//            var name = user.email!!
-//            Log.e("######this is user2: ", user.toString())
-//
-//            var indexarray = name.split("@")
-//            rUser = indexarray[0]
-//            Log.e("######this is user: ", rUser)
-//            userid.text = rUser
-//        }
-//        else{
-//            userid.text = "Please Login"
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
