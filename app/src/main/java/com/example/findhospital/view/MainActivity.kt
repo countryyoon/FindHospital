@@ -1,8 +1,12 @@
 package com.example.findhospital.view
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -12,8 +16,10 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.findhospital.R
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.nav_header.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -43,7 +49,32 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             startActivity(intent)
         }
 
+        //useriddisplay.text = "Please Login"
+
+
     }
+
+
+
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        Log.e("tagtagtag", "tttt")
+//        var user = FirebaseAuth.getInstance().currentUser
+//        var rUser: String = ""
+//
+//        if(user != null){
+//            var name = user.email!!
+//            Log.e("######this is user2: ", user.toString())
+//
+//            var indexarray = name.split("@")
+//            rUser = indexarray[0]
+//            Log.e("######this is user: ", rUser)
+//            userid.text = rUser
+//        }
+//        else{
+//            userid.text = "Please Login"
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -55,17 +86,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val userReserveIntent = Intent(this, CheckUserReserve::class.java)
                 startActivity(userReserveIntent)
             }
-            R.id.nav_friends -> {
-                Toast.makeText(this, "Friends clicked", Toast.LENGTH_SHORT).show()
-            }
-            R.id.nav_update -> {
-                Toast.makeText(this, "Update clicked", Toast.LENGTH_SHORT).show()
-            }
-            R.id.nav_logout -> {
-                Toast.makeText(this, "Sign out clicked", Toast.LENGTH_SHORT).show()
-            }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
+
 }

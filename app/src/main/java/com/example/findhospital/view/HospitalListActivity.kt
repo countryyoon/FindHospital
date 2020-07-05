@@ -5,6 +5,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.location.Location
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +15,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ListView
+import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import com.example.findhospital.R
 import com.example.findhospital.controller.HospitalListAdapter
@@ -23,6 +26,8 @@ import retrofit2.*
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 
 class HospitalListActivity : AppCompatActivity() {
+
+    lateinit var toolbar: Toolbar
 
     val PERMISSIONS = arrayOf(
         Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -40,6 +45,12 @@ class HospitalListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hospital_list)
+        //supportActionBar!!.setBackgroundDrawable(ColorDrawable(Color.parseColor("#3C3CFF")))
+
+        toolbar = findViewById(R.id.tb2)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+
         loadData()
     }
 

@@ -6,10 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".view.MapDPActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb6"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorBackBlue"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:text="병원 찾기"
+            android:textSize="30dp"
+            android:textColor="#FFFFFF"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapViewList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/myLocationButton2"

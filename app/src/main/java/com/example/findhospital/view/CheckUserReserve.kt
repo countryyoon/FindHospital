@@ -1,9 +1,13 @@
 package com.example.findhospital.view
 
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ListView
+import androidx.appcompat.widget.Toolbar
 import com.example.findhospital.R
 import com.example.findhospital.controller.reserveAdapter
 import com.example.findhospital.model.userReserveModel
@@ -13,18 +17,32 @@ import com.google.firebase.database.*
 class CheckUserReserve : AppCompatActivity() {
 
     private lateinit var userDatabase: DatabaseReference
+    lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_check_user_reserve)
 
+        toolbar = findViewById(R.id.tb5)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+
+        supportActionBar!!.setBackgroundDrawable(ColorDrawable(Color.parseColor("#3C3CFF")))
+
         var user = FirebaseAuth.getInstance().currentUser
         var rUser: String = ""
 
         if(user != null){
-            Log.e("%%%%%%this is user: ", user.toString())
-            var indexarray = user.toString().split(".")
-            rUser = indexarray[5]
+            var name = user.email!!
+            Log.e("######this is user2: ", user.toString())
+
+            var indexarray = name.split("@")
+            rUser = indexarray[0]
+            Log.e("######this is user: ", rUser)
+        }
+        else{
+            val loginIntent = Intent(this, LoginActivity::class.java)
+            startActivity(loginIntent)
         }
 
         var userList : ArrayList<userReserveModel> = ArrayList()

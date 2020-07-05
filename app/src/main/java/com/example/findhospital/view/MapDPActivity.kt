@@ -3,28 +3,38 @@ package com.example.findhospital.view
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.ColorDrawable
 import android.location.Location
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import com.example.findhospital.R
 import com.example.findhospital.model.rItem
 import com.example.findhospital.model.rItems
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_map_dp.*
 
 
 class MapDPActivity : AppCompatActivity() {
+
+    lateinit var toolbar: Toolbar
+    lateinit var mHos: List<rItem>
+    //mapHosList: List<rItem>?
 
     val PERMISSIONS = arrayOf(
         Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -37,16 +47,22 @@ class MapDPActivity : AppCompatActivity() {
 
     var googleMap: GoogleMap? =null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map_dp)
+
+        toolbar = findViewById(R.id.tb6)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+
+        //supportActionBar!!.setBackgroundDrawable(ColorDrawable(Color.parseColor("#3C3CFF")))
 
         mapViewList.onCreate(savedInstanceState)
 
         val mapHospital by lazy { intent.extras!!["mapList"] as rItems }
 
-        val mHos = mapHospital.elementItem
+        //val mHos = mapHospital.elementItem
+        mHos = mapHospital.elementItem!!
 
         if(hasPermissions()){
             initMap(mHos)
@@ -55,6 +71,7 @@ class MapDPActivity : AppCompatActivity() {
         }
 
         myLocationButton2.setOnClickListener { onMyLocationButtonClick() }
+
     }
 
 
@@ -120,8 +137,32 @@ class MapDPActivity : AppCompatActivity() {
                 .position(LatLng(DetailLatLng.latitude, DetailLatLng.longitude))
                 .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
         )
+
+        googleMap?.setOnMarkerClickListener(object:GoogleMap.OnMarkerClickListener{
+            override fun onMarkerClick(p0: Marker?): Boolean {
+                //Toast.makeText(MapDPActivity::class.java, "marker clicked", Toast.LENGTH_SHORT).show()
+                var sss: LatLng = p0!!.position
+                checkMarkerInfo(sss)
+                Log.e("####Markerclicked", sss.toString())
+                return true
+            }
+        })
     }
 
+    fun checkMarkerInfo(latlng: LatLng){
+        val lSize: Int = mHos.size
+        var checki: Int = -1
+
+        for(i in 0..lSize-1){
+            if(latlng.longitude == mHos.get(i).XPos!!.toDouble()){
+                checki=i
+            }
+        }
+        //intent 시작
+        val detailIntent = Intent(this, HospitalDetailActivity::class.java)
+        detailIntent.putExtra("detailHospital", mHos[checki])
+        startActivity(detailIntent)
+    }
 
     val bitmap by lazy {
         val drawable = resources.getDrawable(R.drawable.blus_cross) as BitmapDrawable

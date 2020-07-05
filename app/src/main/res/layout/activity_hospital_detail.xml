@@ -11,10 +11,29 @@
     android:layout_height="match_parent"
     tools:context=".view.HospitalDetailActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb3"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorBackBlue"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:text="병원 찾기"
+            android:textSize="30dp"
+            android:textColor="#FFFFFF"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        android:layout_height="300dp"
+        android:layout_below="@id/tb3"/>
 
     <TextView
         android:id="@+id/detailHospitalName"
@@ -67,7 +86,7 @@
         android:layout_alignBottom="@+id/mapView"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentTop="false"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginStart="342dp"

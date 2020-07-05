@@ -7,7 +7,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.ColorDrawable
 import android.location.Location
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +18,7 @@ import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import com.example.findhospital.R
 import com.example.findhospital.model.hosAssesment
@@ -36,6 +39,8 @@ import java.util.*
 
 class HospitalDetailActivity : AppCompatActivity() {
 
+    lateinit var toolbar: Toolbar
+
     val PERMISSIONS = arrayOf(
         Manifest.permission.ACCESS_COARSE_LOCATION,
         Manifest.permission.ACCESS_FINE_LOCATION
@@ -53,6 +58,11 @@ class HospitalDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hospital_detail)
+
+        toolbar = findViewById(R.id.tb3)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        //supportActionBar!!.setBackgroundDrawable(ColorDrawable(Color.parseColor("#3C3CFF")))
 
         // 인텐트에서 넘겨받은 병원 정보 가져오기
         val hospital by lazy { intent.extras!!["detailHospital"] as rItem }
@@ -79,7 +89,10 @@ class HospitalDetailActivity : AppCompatActivity() {
         myLocationButton.setOnClickListener{ onMyLocationButtonClick(hLocation) }
 
         reservationButton.setOnClickListener {
-            val reserveIntent = Intent(this, reserveCalenderActivity::class.java)
+//            val reserveIntent = Intent(this, reserveCalenderActivity::class.java)
+//            reserveIntent.putExtra("rsvHospitalName", hospital.yadmNm)
+//            startActivity(reserveIntent)
+            val reserveIntent = Intent(this, ReserveActivity::class.java)
             reserveIntent.putExtra("rsvHospitalName", hospital.yadmNm)
             startActivity(reserveIntent)
         }
