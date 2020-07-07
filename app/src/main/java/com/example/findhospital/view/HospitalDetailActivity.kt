@@ -30,12 +30,14 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_hospital_detail.*
+import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 class HospitalDetailActivity : AppCompatActivity() {
 
@@ -189,8 +191,15 @@ class HospitalDetailActivity : AppCompatActivity() {
     }
 
     fun loadData(kiho: String){
+
+        var httpClient = OkHttpClient.Builder()
+            .callTimeout(2, TimeUnit.MINUTES)
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(2, TimeUnit.MINUTES)
+
         val retrofit = Retrofit.Builder()
             .baseUrl("http://apis.data.go.kr/B551182/hospAsmRstInfoService/")
+            .client(httpClient.build())
             .addConverterFactory(SimpleXmlConverterFactory.create())
             .build()
 
